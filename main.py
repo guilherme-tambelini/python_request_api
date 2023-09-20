@@ -16,6 +16,7 @@ def get_data_api(url):
     strength_overall_home = []
     strength_overall_away = []
     win = []
+    date = []
 
     try:
         # send API call and retrieve JSON data
@@ -31,6 +32,7 @@ def get_data_api(url):
             strength_overall_home.append(i['strength_overall_home'])
             strength_overall_away.append(i['strength_overall_away'])
             win.append(i['win'])
+            date.append(datetime.now().strftime("%Y%m%d"))
         
         # Prepare a dictionary in order to turn it into a pandas dataframe
         teams_dict = {
@@ -40,7 +42,9 @@ def get_data_api(url):
             "strength" : strength,
             "strength_overall_home" : strength_overall_home,
             "strength_overall_away" : strength_overall_away,
-            "win" : win
+            "win" : win,
+            "date" : date
+
         }
     
     except Exception as e:
@@ -54,7 +58,8 @@ def get_data_api(url):
                                                 'strength',
                                                 'strength_overall_home',
                                                 'strength_overall_away',
-                                                'win'
+                                                'win',
+                                                'date'
                                                 ])
 
     return df_teams
