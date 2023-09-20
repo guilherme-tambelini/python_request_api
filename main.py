@@ -3,6 +3,8 @@ import requests
 import json
 import pandas as pd
 from google.cloud import storage
+import google.cloud.logging
+import logging
 
 def get_data_api(url):
     
@@ -77,8 +79,8 @@ def main(data, context):
     bucket_name = '20230908_my_bucket_001'
     
     # call get_data
-    print(datetime.now().strftime("%Y%m%d%H%M%S")+' - Cloud function started')
+    logging.info(datetime.now().strftime("%Y%m%d%H%M%S")+' - Cloud function started')
     df = get_data_api(f'{url}{endpoint}')
     # call api_to_gcs
     df = api_to_gcs(df,filename,project_name,bucket_name)
-    print(datetime.now().strftime("%Y%m%d%H%M%S")+' - Cloud function finished')
+    logging.info(datetime.now().strftime("%Y%m%d%H%M%S")+' - Cloud function finished')

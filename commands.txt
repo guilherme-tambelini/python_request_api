@@ -1,0 +1,1 @@
+gcloud functions deploy request_api_fantasy_premierleague --runtime python39 --region us-central1 --trigger-topic my_topic_01 --entry-point main
